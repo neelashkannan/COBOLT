@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<form method="POST">
+    <input type="text" name="chat-input">
+    <input type="submit" value="Submit">
+</form>
+
+{% if output %}
+    <h1>{{ output }}</h1>
+{% endif %}
+
+</body>
+</html>

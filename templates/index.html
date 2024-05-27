@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>COBOLT - Neelash's AI</title>
+    <link rel="stylesheet" href="static/style.css">
+</head>
+<body>
+    <header>
+        <h1>Welcome to COBOLT</h1>
+        <p>An AI-powered chatbot ready to assist you</p>
+    </header>
+    <main>
+        <div class="chat-container" id="chatContainer">
+            <!-- Chat messages will be dynamically added here -->
+            <pre id="outputMessages"></pre> <!-- Use <pre> for preformatted text -->
+        </div>
+        <form action="/" method="POST" class="input-container" id="chatForm">
+            <input type="text" name="chat-input" id="userInput" placeholder="Type your message..." required>
+            <input type="submit" value="Send">
+            <div class="loading" id="loadingAnimation"></div> <!-- Loading animation -->
+        </form>
+    </main>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function() {
+    $('#chatForm').submit(function(event) {
+        event.preventDefault();
+        $('#loadingAnimation').css('display', 'block');
+        $('#outputMessages').empty();
+
+        $.ajax({
+            url: '/',
+            type: 'POST',
+            data: $('#chatForm').serialize(),
+            dataType: 'json',
+            success: function(response) {
+                // Set the HTML content of the <pre> element to preserve formatting and align text
+                $('#outputMessages').html('<pre style="white-space: pre-wrap; text-align: left;">' + response.response_text + '</pre>');
+                $('#loadingAnimation').css('display', 'none');
+            },
+            error: function(xhr, status, error) {
+                console.log("Error:", error); // Log any errors to the console
+            }
+        });
+    });
+});
+    </script>
+    
+</body>
+</html>
