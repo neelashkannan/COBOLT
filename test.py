@@ -1,6 +1,6 @@
 import streamlit as st
 import ollama
-
+ollama.pull("tinyllama")
 st.title("Echo Bot")
 
 # Initialize chat history
@@ -18,7 +18,7 @@ if prompt := st.chat_input("What is up?"):
     with st.chat_message("user"):
         st.markdown(' '.join(prompt.split('\n')), unsafe_allow_html=True)
         stream = ollama.chat(
-            model='example',
+            model='tinyllama',
             messages=[{'role': 'user', 'content': ' '.join(prompt.split('\n'))}],
             stream=True,
         )
