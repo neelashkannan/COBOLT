@@ -12,8 +12,9 @@ RUN pip install --no-cache-dir -r requirements.txt
 
 # Make port 8501 available to the world outside this container
 EXPOSE 8501
-CMD ["curl", "https://ollama.ai/install.sh | sh"]
-CMD ["ollama", "serve"]
-CMD ["python3", "test.py"]
+
+# Install and start Ollama (assuming it's necessary before running your app)
+RUN curl -s https://ollama.ai/install.sh | sh
+
 # Run app.py when the container launches
-CMD ["streamlit", "run", "test.py"]
+CMD ["sh", "-c", "ollama serve & streamlit run test.py"]
