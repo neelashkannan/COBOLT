@@ -11,7 +11,7 @@ COPY . /app
 RUN pip install --no-cache-dir -r requirements.txt
 
 # Install Ollama (if required)
-RUN curl -s https://ollama.ai/install.sh | sh
+# RUN curl -s https://ollama.ai/install.sh | sh
 
 # Expose the port the app runs on
 EXPOSE 8501
