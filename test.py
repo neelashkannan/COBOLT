@@ -1,6 +1,6 @@
 import streamlit as st
 import ollama
-ollama.pull("tinyllama")
+#ollama.pull("tinyllama")
 st.title("Echo Bot")
 
 # Initialize chat history
