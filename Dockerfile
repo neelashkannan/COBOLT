@@ -17,4 +17,4 @@ EXPOSE 8501
 RUN curl -s https://ollama.ai/install.sh | sh
 
 # Run app.py when the container launches
-CMD ["sh", "-c", "ollama serve & streamlit run test.py"]
+CMD ["streamlit", "run", "test.py"]
