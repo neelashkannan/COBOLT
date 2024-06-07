@@ -5,16 +5,16 @@ FROM python:3.10
 WORKDIR /app
 
 # Add the current directory contents into the container at /app
-ADD . /app
+COPY . /app
 
 # Install any needed packages specified in requirements.txt
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Make port 8501 available to the world outside this container
-EXPOSE 8501
-
-# Install and start Ollama (assuming it's necessary before running your app)
+# Install Ollama (if required)
 RUN curl -s https://ollama.ai/install.sh | sh
 
-# Run app.py when the container launches
+# Expose the port the app runs on
+EXPOSE 8501
+
+# Default command
 CMD ["streamlit", "run", "test.py"]
