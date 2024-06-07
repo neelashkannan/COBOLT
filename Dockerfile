@@ -4,11 +4,14 @@ FROM python:3.10
 # Set the working directory in the container to /app
 WORKDIR /app
 
-# Add the current directory contents into the container at /app
-COPY . /app
+# Copy only the requirements.txt file first to leverage Docker cache
+COPY requirements.txt .
 
 # Install any needed packages specified in requirements.txt
 RUN pip install --no-cache-dir -r requirements.txt
+
+# Copy the rest of the application code
+COPY . .
 
 # Install Ollama (if required)
 RUN curl -s https://ollama.ai/install.sh | sh
@@ -16,5 +19,5 @@ RUN curl -s https://ollama.ai/install.sh | sh
 # Expose the port the app runs on
 EXPOSE 8501
 
-# Default command
-CMD ["streamlit", "run", "test.py"]
+# Default command to run the app
+CMD ["sh", "-c", "streamlit run test.py && ollama serve"]
