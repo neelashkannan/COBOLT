@@ -1,6 +1,6 @@
 import streamlit as st
 import ollama
-ollama.pull("example")
+#ollama.pull("example")
 st.set_page_config(
     page_title="Robonium",
     layout="wide"
