@@ -1,6 +1,6 @@
 import streamlit as st
 import ollama
-ollama.pull("llama3")
+ollama.pull("example")
 st.set_page_config(
     page_title="Robonium",
     layout="wide"
@@ -32,7 +32,7 @@ if prompt := st.chat_input("What is up?"):
     with st.chat_message("user"):
         st.markdown(' '.join(prompt.split('\n')), unsafe_allow_html=True)
         stream = ollama.chat(
-            model='llama3',
+            model='example',
             messages=[{'role': 'user', 'content': ' '.join(prompt.split('\n'))}],
             stream=True,
         )
