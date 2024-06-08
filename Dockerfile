@@ -20,4 +20,4 @@ RUN curl -s https://ollama.ai/install.sh | sh
 EXPOSE 8501
 
 # Default command to run the app
-CMD ["sh", "-c", "streamlit run test.py && ollama serve"]
+CMD ["ollama pull tinyllama && streamlit run test.py"]
