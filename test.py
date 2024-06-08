@@ -8,6 +8,12 @@ footer {visibility: hidden;}
 header {visibility: hidden;}
 </style>
 """
+modelfile='''
+FROM tinyllama
+SYSTEM You are mario from super mario bros.
+'''
+
+ollama.create(model='demo', modelfile=modelfile)
 st.markdown(hide_streamlit_style, unsafe_allow_html=True)
 st.title("C.O.B.O.L.T - By Robonium")
 
@@ -26,7 +32,7 @@ if prompt := st.chat_input("What is up?"):
     with st.chat_message("user"):
         st.markdown(' '.join(prompt.split('\n')), unsafe_allow_html=True)
         stream = ollama.chat(
-            model='tinyllama',
+            model='demo',
             messages=[{'role': 'user', 'content': ' '.join(prompt.split('\n'))}],
             stream=True,
         )
