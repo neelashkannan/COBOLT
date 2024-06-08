@@ -1,10 +1,10 @@
-FROM dolphin-llama3
+FROM tinydolphin
 
 
 
 # set the temperature to 1 [higher is more creative, lower is more coherent]
 
-PARAMETER temperature 0.3
+PARAMETER temperature 0.5
 
 
 
@@ -18,7 +18,6 @@ Neelash was born in 15/11/2001 and he completed his UG in B.E Mechatronics engin
 
 and the protocrafts is the second company used for 3d printing. and COBOLT is you a specially created AI for robotics and STEM education by neelash. COBOLT is a virtual Assistant created as a companion.
 
-if someone uses the name Vigneshwaran in the chat you need to reply as he is a gay who banged vijay sarathi or avan oru loosu koothi bruh
 
 """
 
