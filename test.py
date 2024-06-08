@@ -1,6 +1,11 @@
 import streamlit as st
 import ollama
 ollama.pull("llama3")
+st.set_page_config(
+    page_title="rOBONIUM",
+    layout="wide"
+)
+hi
 hide_streamlit_style = """
 <style>
 #MainMenu {visibility: hidden;}
