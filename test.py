@@ -1,6 +1,14 @@
 import streamlit as st
 import ollama
 #ollama.pull("tinyllama")
+hide_streamlit_style = """
+<style>
+#MainMenu {visibility: hidden;}
+footer {visibility: hidden;}
+header {visibility: hidden;}
+</style>
+"""
+st.markdown(hide_streamlit_style, unsafe_allow_html=True)
 st.title("C.O.B.O.L.T - By Robonium")
 
 # Initialize chat history
