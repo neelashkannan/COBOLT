@@ -1,10 +1,10 @@
-FROM llama3
+FROM qwen2:72b
 
 
 
 # set the temperature to 1 [higher is more creative, lower is more coherent]
 
-PARAMETER temperature 1
+PARAMETER temperature 0.3
 
 
 
