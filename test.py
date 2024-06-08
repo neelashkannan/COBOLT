@@ -1,7 +1,7 @@
 import streamlit as st
 import ollama
 #ollama.pull("tinyllama")
-st.title("Echo Bot")
+st.title("C.O.B.O.L.T - By Robonium")
 
 # Initialize chat history
 if "messages" not in st.session_state:
