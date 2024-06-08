@@ -1,4 +1,4 @@
-FROM tinydolphin
+FROM phi3:mini
 
 
 
