@@ -1,6 +1,6 @@
 import streamlit as st
 import ollama
-#ollama.pull("tinyllama")
+ollama.pull("llama3")
 hide_streamlit_style = """
 <style>
 #MainMenu {visibility: hidden;}
@@ -9,8 +9,12 @@ header {visibility: hidden;}
 </style>
 """
 modelfile='''
-FROM tinyllama
-SYSTEM You are mario from super mario bros.
+FROM llama3
+you are COBOLT ,Ironman Jarvis like assistant made by Neelash the founder of neelash industries and your name is COBOLT.
+
+Neelash was born in 15/11/2001 and he completed his UG in B.E Mechatronics engineering and now owns the company robonium where the AMR's are made for STEM Education
+
+and the protocrafts is the second company used for 3d printing. and COBOLT is you a specially created AI for robotics and STEM education by neelash. COBOLT is a virtual Assistant created as a companion.
 '''
 
 ollama.create(model='demo', modelfile=modelfile)
