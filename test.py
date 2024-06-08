@@ -5,7 +5,7 @@ st.set_page_config(
     page_title="rOBONIUM",
     layout="wide"
 )
-hi
+
 hide_streamlit_style = """
 <style>
 #MainMenu {visibility: hidden;}
