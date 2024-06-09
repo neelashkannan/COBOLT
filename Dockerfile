@@ -10,4 +10,4 @@ RUN curl -s https://ollama.ai/install.sh | sh
 
 EXPOSE 8501
 
-CMD ["sh", "-c", "ollama serve & sleep 10 && ollama create example -f Modelfile & sleep 300 && ollama create example -f Modelfile2 & sleep 100 && streamlit run test.py"]
+CMD ["sh", "-c", "ollama serve & sleep 10 && ollama create demo1 -f Modelfile & sleep 300 && ollama create demo2 -f Modelfile2 & sleep 100 && streamlit run test.py"]
