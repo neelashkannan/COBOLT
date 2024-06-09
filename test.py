@@ -15,7 +15,43 @@ header {visibility: hidden;}
 """
 
 st.markdown(hide_streamlit_style, unsafe_allow_html=True)
-st.title("C.O.B.O.L.T - By Robonium")
+col1, col2 = st.columns(2)
+with col1:
+    st.title("C.O.B.O.L.T - By Robonium")
+with col2:
+    a = st.selectbox("Choose the model", options=["Baby Cobolt","Teenage Cobolt"])
+    
+mname = "test"
+if a == "Baby Cobolt":
+    m = "phi3"
+    modelfile=f'''
+FROM {m}
+SYSTEM 
+you are Baby COBOLT ,a lite model Ironman Jarvis like assistant made by Neelash the founder of neelash industries and your name is COBOLT.
+
+Neelash was born in 15/11/2001 and he completed his UG in B.E Mechatronics engineering and now owns the company robonium where the AMR's are made for STEM Education
+
+and the protocrafts is the second company used for 3d printing. and COBOLT is you a specially created AI for robotics and STEM education by neelash. COBOLT is a virtual Assistant created as a companion.
+
+'''
+    manme = "demo1"
+elif a == "Teenage Cobolt":
+    m = "llama3"
+    modelfile=f'''
+FROM {m}
+SYSTEM 
+you are Teenage COBOLT ,a large model Ironman Jarvis like assistant made by Neelash the founder of neelash industries and your name is COBOLT.
+
+Neelash was born in 15/11/2001 and he completed his UG in B.E Mechatronics engineering and now owns the company robonium where the AMR's are made for STEM Education
+
+and the protocrafts is the second company used for 3d printing. and COBOLT is you a specially created AI for robotics and STEM education by neelash. COBOLT is a virtual Assistant created as a companion.
+
+'''
+    manme = "demo2"
+
+
+if(m != None):
+    ollama.create(model=mname, modelfile=modelfile)
 
 # Initialize chat history
 if "messages" not in st.session_state:
