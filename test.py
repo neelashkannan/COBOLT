@@ -21,12 +21,12 @@ with col1:
 with col2:
     a = st.selectbox("Choose the model", options=["Baby Cobolt","Teenage Cobolt"])
     
-
+ 
 if a == "Baby Cobolt":
-    manme = "demo1"
+   global manme = "demo1"
 elif a == "Teenage Cobolt":
     m = "llama3"
-    manme = "demo2"
+    global manme = "demo2"
 
 
 
