@@ -25,7 +25,7 @@ SIDENAV_WIDTH = 200
     allowed_iframe_parents=["https://google.github.io"]
   ),
   path="/",
-  title="Mesop Demo Chat",
+  title="Robonium Chat",
   
 )
 
