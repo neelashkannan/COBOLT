@@ -61,7 +61,7 @@ def transform(input: str, history: list[mel.ChatMessage]):
     
     if(prompt := input):
         stream = ollama.chat(
-            model="demo",
+            model="demo2",
             messages=[{'role': 'user', 'content': prompt}],
             stream=True,
         )
