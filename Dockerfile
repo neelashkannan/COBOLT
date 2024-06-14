@@ -10,6 +10,7 @@ RUN curl -s https://ollama.ai/install.sh | sh
 
 RUN pip install mesop
 
-EXPOSE 32123
+EXPOSE 8501
+
 
 CMD ["sh", "run.sh"]
