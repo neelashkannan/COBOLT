@@ -5,7 +5,7 @@ FROM python:3.10-slim-buster
 WORKDIR /app
 
 # Add only the requirements.txt first to leverage Docker cache
-COPY ./requirements.txt /app/requirements.txt
+COPY .
 
 # Install any needed packages specified in requirements.txt
 RUN pip install --no-cache-dir -r requirements.txt
@@ -24,4 +24,4 @@ ENV MODEL1 demo1
 ENV MODEL2 demo2
 
 # Run ollama serve when the container launches
-CMD sh -c "ollama serve & sleep 5 && ollama create $MODEL1 -f Modelfile & sleep 10 && ollama create $MODEL2 -f Modelfile2 & sleep 10 && streamlit run test.py"
+CMD ["sh", "-c", "ollama serve & sleep 5 && ollama create demo1 -f Modelfile & sleep 10 && ollama create demo2 -f Modelfile2 & sleep 10 && streamlit run test.py"]
