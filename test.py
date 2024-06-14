@@ -6,7 +6,7 @@ import ollama
 UPLOAD_DIR = "uploads"
 PAGE_CONFIG = {"page_title": "Robonium", "layout": "wide"}
 MODEL_OPTIONS = ["Baby Cobolt", "Teenage Cobolt"]
-MODEL_NAMES = {"Baby Cobolt": "demo", "Teenage Cobolt": "test"}
+MODEL_NAMES = {"Baby Cobolt": "demo1", "Teenage Cobolt": "demo2"}
 
 # Set page configuration
 st.set_page_config(**PAGE_CONFIG)
