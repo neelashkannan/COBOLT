@@ -23,4 +23,4 @@ EXPOSE 8501
 
 
 # Run ollama serve when the container launches
-CMD ["sh", "-c", "ollama serve & sleep 5 && ollama create demo1 -f Modelfile & sleep 10 && ollama create demo2 -f Modelfile2 & sleep 10 && streamlit run test.py"]
+CMD ["sh", "run.sh"]
