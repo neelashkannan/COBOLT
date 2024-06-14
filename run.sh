@@ -1,11 +1,11 @@
 ollama serve &
 sleep 5
 
-ollama pull tinyllama &
+ollama create demo1 -f Modelfile &
 
 sleep 10
 
-ollama pull llava &
+ollama create demo2 -f Modelfile2 &
 
 sleep 50
 streamlit run test.py 
