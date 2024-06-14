@@ -1,5 +1,5 @@
 
-FROM llava-llama3
+FROM benzie/llava-phi-3
 
 
 # set the temperature to 1 [higher is more creative, lower is more coherent]
