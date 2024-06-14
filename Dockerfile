@@ -5,7 +5,10 @@ FROM python:3.10-slim-buster
 WORKDIR /app
 
 COPY . .
-RUN wget -qO- https://ollama.ai/install.sh | sh
+
+RUN apt-get update && apt-get install -y curl
+
+RUN curl -qO- https://ollama.ai/install.sh | sh
 
 RUN pip install --no-cache-dir -r requirements.txt
 
