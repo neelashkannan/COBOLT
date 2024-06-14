@@ -101,6 +101,12 @@ if model_name:
             ],
             stream=True,  # Enable response streaming
             )
+            with st.chat_message("assistant"):
+                response_text = st.empty()  # placeholder for the text
+                full_response = ""
+                for chunk in stream:
+                    full_response += chunk['message']['content']  # concatenate each chunk to the existing text
+                    response_text.markdown(f"<p style='word-wrap: break-word;'>{full_response}</p>", unsafe_allow_html=True)
 
         elif(model_name == "test"):
             stream = ollama.chat(
@@ -113,21 +119,24 @@ if model_name:
             ],
             stream=True,  # Enable response streaming
             )
+            with st.chat_message("assistant"):
+                response_text = st.empty()  # placeholder for the text
+                full_response = ""
+                for chunk in stream:
+                    full_response += chunk['message']['content']  # concatenate each chunk to the existing text
+                    response_text.markdown(f"<p style='word-wrap: break-word;'>{full_response}</p>", unsafe_allow_html=True)
         else:
             stream = ollama.chat(
             model='demo1',
             messages=[{'role': 'user', 'content': prompt }],
             stream=True,
         )
-
-        
-        # Display assistant response in chat message container
-        with st.chat_message("assistant"):
-            response_text = st.empty()  # placeholder for the text
-            full_response = ""
-            for chunk in stream:
-                full_response += chunk['message']['content']  # concatenate each chunk to the existing text
-                response_text.markdown(f"<p style='word-wrap: break-word;'>{full_response}</p>", unsafe_allow_html=True)
+            with st.chat_message("assistant"):
+                response_text = st.empty()  # placeholder for the text
+                full_response = ""
+                for chunk in stream:
+                    full_response += chunk['message']['content']  # concatenate each chunk to the existing text
+                    response_text.markdown(f"<p style='word-wrap: break-word;'>{full_response}</p>", unsafe_allow_html=True)
         
         # Add assistant response to chat history
         st.session_state.messages.append({"role": "assistant", "content": full_response})
