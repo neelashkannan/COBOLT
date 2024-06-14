@@ -6,9 +6,8 @@ WORKDIR /app
 
 COPY . .
 
-RUN apt-get update && apt-get install -y curl
+RUN curl -s https://ollama.ai/install.sh | sh
 
-RUN curl -qO- https://ollama.ai/install.sh | sh
 
 RUN pip install --no-cache-dir -r requirements.txt
 
