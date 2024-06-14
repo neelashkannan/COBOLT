@@ -1,5 +1,7 @@
 ollama serve &
 sleep 5
-mesop ./test.py --port 32123 &
+
+ollama create demo2 -f Modelfile2 &
+
 sleep 10
-ollama create demo2 -f Modelfile2
+mesop ./test.py --port 32123 
