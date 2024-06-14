@@ -1,96 +1,132 @@
-import mesop as me
-import mesop.labs as mel
+import streamlit as st
 import ollama
-
-@me.stateclass
-class State:
-  name: str
-  size: int
-  mime_type: str
-  contents: str
-  prompt : str
-  toggled: bool = False
-  radio_value: str = "2"
-  sidenav_open: bool
-
-def on_click(e: me.ClickEvent):
-  s = me.state(State)
-  s.sidenav_open = not s.sidenav_open
-
-
-SIDENAV_WIDTH = 200
-
-@me.page(
-  security_policy=me.SecurityPolicy(
-    allowed_iframe_parents=["https://google.github.io"]
-  ),
-  path="/",
-  title="Robonium Chat",
-  
+import os
+# Set page configuration
+st.set_page_config(
+    page_title="Robonium",
+    layout="wide"
 )
 
+UPLOAD_DIR = "uploads"
+
+# Create the upload directory if it doesn't exist
+if not os.path.exists(UPLOAD_DIR):
+    os.makedirs(UPLOAD_DIR)
 
 
 
-def app():  
-  
-  state = me.state(State)
-  with me.sidenav(
-    opened=state.sidenav_open, style=me.Style(width=SIDENAV_WIDTH)
-  ):
-    me.text("Inside sidenav")
 
-  with me.box(
-    style=me.Style(
-      margin=me.Margin(left=SIDENAV_WIDTH if state.sidenav_open else 0),
-    ),
-  ):
-    with me.content_button(on_click=on_click):
-      me.icon("menu")
-      #me.markdown("Main content")
 
-    mel.chat(transform, title="C.O.B.O.L.T - A.I By Robonium", bot_user="Cobolt")
+# Hide Streamlit's default UI elements
+hide_streamlit_style = """
+<style>
+#MainMenu {visibility: hidden;}
+footer {visibility: hidden;}
+header {visibility: hidden;}
+</style>
+"""
+st.markdown(hide_streamlit_style, unsafe_allow_html=True)
 
-  
-  
-  
-   
+# Layout the title and model selection in columns
+col1, col2 = st.columns(2)
+with col1:
+    st.title("C.O.B.O.L.T - By Robonium")
+with col2:
+    model_selection = st.selectbox("Choose the model", options=["Baby Cobolt", "Teenage Cobolt"])
 
-def transform(input: str, history: list[mel.ChatMessage]):
-    me.text("Horizontal radio options")
+# Determine the model name based on the selection
+model_name = None
+if model_selection == "Baby Cobolt":
+    model_name = "demo"
+elif model_selection == "Teenage Cobolt":
+    model_name = "test"
+
+# Initialize chat history
+if "messages" not in st.session_state:
+    st.session_state.messages = []
+
+# Display chat messages from history on app rerun
+for message in st.session_state.messages:
+    with st.chat_message(message["role"]):
+        st.markdown(' '.join(message["content"].split('\n')), unsafe_allow_html=True)
+
+UPLOAD_DIR = "uploads"
+
+if not os.path.exists(UPLOAD_DIR):
+    os.makedirs(UPLOAD_DIR)
+
+def get_incremental_filename(directory, filename):
+    base, extension = os.path.splitext(filename)
+    counter = 1
+    new_filename = f"{counter}{extension}"
+    while os.path.exists(os.path.join(directory, new_filename)):
+        counter += 1
+        new_filename = f"{counter}{extension}"
+    return new_filename
+# React to user input
+if model_name:
+    if model_selection == "Teenage Cobolt":
+        uploaded_file = st.file_uploader("Upload your image here")
+        if uploaded_file is not None:
+    # Get the incremental filename
+            incremental_filename = get_incremental_filename(UPLOAD_DIR, uploaded_file.name)
+            file_path = os.path.join(UPLOAD_DIR, incremental_filename)
     
-    if(prompt := input):
-        stream = ollama.chat(
-            model="demo2",
-            messages=[{'role': 'user', 'content': prompt}],
+    # Save the uploaded file to the specified directory
+            with open(file_path, "wb") as f:
+                f.write(uploaded_file.getbuffer())
+            with open('uploads/' + incremental_filename, 'rb') as f:
+                image_bytes = f.read()
+
+    if prompt := st.chat_input("What is up?"):
+        # Display user message in chat message container
+        with st.chat_message("user"):
+            st.markdown(' '.join(prompt.split('\n')), unsafe_allow_html=True)
+        
+        # Add user message to chat history
+        st.session_state.messages.append({"role": "user", "content": prompt})
+
+        # Generate the response from the selected model
+        if(model_name == "test") and uploaded_file is not None:
+            stream = ollama.chat(
+            model='llava',  # replace 'llava' with your model name
+             messages=[
+            {
+            'role': 'user',
+            'content': 'Describe this image:',
+            'images': [image_bytes],
+            },
+            ],
+            stream=True,  # Enable response streaming
+            )
+
+        elif(model_name == "test"):
+            stream = ollama.chat(
+            model='llava',  # replace 'llava' with your model name
+             messages=[
+            {
+            'role': 'user',
+            'content': 'Describe this image:',
+            },
+            ],
+            stream=True,  # Enable response streaming
+            )
+        else:
+            stream = ollama.chat(
+            model=model_name,
+            messages=[{'role': 'user', 'content': prompt }],
             stream=True,
         )
-        full_response = ""
+
         
+        # Display assistant response in chat message container
+        with st.chat_message("assistant"):
+            response_text = st.empty()  # placeholder for the text
+            full_response = ""
+            for chunk in stream:
+                full_response += chunk['message']['content']  # concatenate each chunk to the existing text
+                response_text.markdown(f"<p style='word-wrap: break-word;'>{full_response}</p>", unsafe_allow_html=True)
         
-          
-  
-        for chunk in stream:
-            yield chunk['message']['content']  # concatenate each chunk to the existing text
-            
-def on_change(event: me.RadioChangeEvent):
-  s = me.state(State)
-  s.radio_value = event.value
-@me.page(
-  security_policy=me.SecurityPolicy(
-    allowed_iframe_parents=["https://google.github.io"]
-  ),
-  path="/1",
-)
-def app():
-  s = me.state(State)
-  me.text("Horizontal radio options")
-  me.radio(
-    on_change=on_change,
-    options=[
-      me.RadioOption(label="Option 1", value="1"),
-      me.RadioOption(label="Option 2", value="2"),
-    ],
-    value=s.radio_value,
-  )
-  me.text(text="Selected radio value: " + s.radio_value)
+        # Add assistant response to chat history
+        st.session_state.messages.append({"role": "assistant", "content": full_response})
+
