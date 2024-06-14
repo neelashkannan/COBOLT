@@ -6,7 +6,7 @@ WORKDIR /app
 
 COPY . .
 
-RUN apk add --no-cache curl
+RUN apt-get update && apt-get install -y curl
 
 
 RUN curl -s https://ollama.ai/install.sh | sh
