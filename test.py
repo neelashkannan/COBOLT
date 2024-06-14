@@ -1,6 +1,15 @@
 import streamlit as st
 import ollama
 import os
+
+# Get the absolute path of the current file
+file_path = os.path.abspath(__file__)
+
+# Get the directory of the current file
+directory = os.path.dirname(file_path)
+
+st.title(f"The directory of this file is: {directory}")
+
 # Set page configuration
 st.set_page_config(
     page_title="Robonium",
