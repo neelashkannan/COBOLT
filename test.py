@@ -2,13 +2,6 @@ import streamlit as st
 import ollama
 import os
 
-# Get the absolute path of the current file
-file_path = os.path.abspath(__file__)
-
-# Get the directory of the current file
-directory = os.path.dirname(file_path)
-
-st.title(f"The directory of this file is: {directory}")
 
 # Set page configuration
 st.set_page_config(
@@ -84,7 +77,7 @@ if model_name:
     # Save the uploaded file to the specified directory
             with open(file_path, "wb") as f:
                 f.write(uploaded_file.getbuffer())
-            with open('uploads/' + incremental_filename, 'rb') as f:
+            with open('/app/uploads/' + incremental_filename, 'rb') as f:
                 image_bytes = f.read()
 
     if prompt := st.chat_input("What is up?"):
