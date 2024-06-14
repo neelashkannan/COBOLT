@@ -115,7 +115,7 @@ if model_name:
             )
         else:
             stream = ollama.chat(
-            model=model_name,
+            model='tinyllama',
             messages=[{'role': 'user', 'content': prompt }],
             stream=True,
         )
