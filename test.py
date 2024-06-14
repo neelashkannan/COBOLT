@@ -91,7 +91,7 @@ if model_name:
         # Generate the response from the selected model
         if(model_name == "test") and uploaded_file is not None:
             stream = ollama.chat(
-            model='llava',  # replace 'llava' with your model name
+            model='demo2',  # replace 'llava' with your model name
              messages=[
             {
             'role': 'user',
@@ -104,7 +104,7 @@ if model_name:
 
         elif(model_name == "test"):
             stream = ollama.chat(
-            model='llava',  # replace 'llava' with your model name
+            model='demo2',  # replace 'llava' with your model name
              messages=[
             {
             'role': 'user',
@@ -115,7 +115,7 @@ if model_name:
             )
         else:
             stream = ollama.chat(
-            model='tinyllama',
+            model='demo1',
             messages=[{'role': 'user', 'content': prompt }],
             stream=True,
         )
