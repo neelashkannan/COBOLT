@@ -12,4 +12,4 @@ RUN pip install mesop
 
 EXPOSE 32123
 
-CMD ["sh", "/app/run.sh"]
+CMD ["sh", "run.sh"]
