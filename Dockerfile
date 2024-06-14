@@ -8,7 +8,6 @@ RUN pip install --no-cache-dir -r requirements.txt
 
 RUN curl -s https://ollama.ai/install.sh | sh
 
-#RUN pip install mesop
 
 EXPOSE 8501
 
