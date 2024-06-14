@@ -12,4 +12,4 @@ RUN pip install mesop
 
 EXPOSE 32123
 
-CMD ["sh", "-c", "ollama serve & sleep 5 && mesop .\test.py --port 32123  & sleep 10 && ollama create demo2 -f Modelfile2"]
+CMD ["sh", "/app/run.sh"]
