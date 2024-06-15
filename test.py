@@ -105,13 +105,10 @@ if model_name:
             )
             with st.chat_message("assistant"):
                 response_text = st.empty()  # placeholder for the text
-                full_response = ""
-                if full_response is None:
-                    count = 0
-                else:
-                    count = 1
-                if count == 1:
+                full_response = None
+                if full_response is None and count == 0:
                     st.warning("generating")
+                    count = count +1
                    
                 for chunk in stream:
                     count = 0
