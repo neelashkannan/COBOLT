@@ -81,7 +81,8 @@ if model_name:
                 image_bytes = f.read()
 
     if prompt := st.chat_input("What is up?"):
-        count = 0
+        if prompt is not None:
+            count = 0
         # Display user message in chat message container
         with st.chat_message("user"):
             st.markdown(' '.join(prompt.split('\n')), unsafe_allow_html=True)
@@ -97,15 +98,16 @@ if model_name:
              messages=[
             {
             'role': 'user',
-            'content': 'Describe this image:',
+            'content': prompt,
             'images': [image_bytes],
             },
             ],
             stream=True,  # Enable response streaming
             )
+            full_response = ""
             with st.chat_message("assistant"):
                 response_text = st.empty()  # placeholder for the text
-                full_response = ""
+                
                 if full_response =="" and count == 0:
                     st.warning("generating")
                     count = count +1
@@ -121,7 +123,7 @@ if model_name:
              messages=[
             {
             'role': 'user',
-            'content': 'Describe this image:',
+            'content': prompt,
             },
             ],
             stream=True,  # Enable response streaming
