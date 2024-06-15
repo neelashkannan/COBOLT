@@ -112,10 +112,11 @@ if model_name:
                     count = 1
                 if count == 1:
                     st.warning("generating")
-                else:
-                    for chunk in stream:
-                        full_response += chunk['message']['content']  # concatenate each chunk to the existing text
-                        response_text.markdown(f"<p style='word-wrap: break-word;'>{full_response}</p>", unsafe_allow_html=True)
+                   
+                for chunk in stream:
+                    count = 0
+                      full_response += chunk['message']['content']  # concatenate each chunk to the existing text
+                      response_text.markdown(f"<p style='word-wrap: break-word;'>{full_response}</p>", unsafe_allow_html=True)
 
         elif(model_name == "test"):
             stream = ollama.chat(
