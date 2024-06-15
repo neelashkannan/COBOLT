@@ -111,7 +111,7 @@ if model_name:
                 else:
                     count = 1
                 if count =1:
-                    st.loader("generating)
+                    st.loader("generating")
                 else:
                     for chunk in stream:
                         full_response += chunk['message']['content']  # concatenate each chunk to the existing text
