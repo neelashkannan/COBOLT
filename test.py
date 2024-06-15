@@ -81,6 +81,7 @@ if model_name:
                 image_bytes = f.read()
 
     if prompt := st.chat_input("What is up?"):
+        global count = 0
         # Display user message in chat message container
         with st.chat_message("user"):
             st.markdown(' '.join(prompt.split('\n')), unsafe_allow_html=True)
@@ -90,6 +91,7 @@ if model_name:
 
         # Generate the response from the selected model
         if(model_name == "test") and uploaded_file is not None:
+          
             stream = ollama.chat(
             model='demo2',  # replace 'llava' with your model name
              messages=[
@@ -104,9 +106,16 @@ if model_name:
             with st.chat_message("assistant"):
                 response_text = st.empty()  # placeholder for the text
                 full_response = ""
-                for chunk in stream:
-                    full_response += chunk['message']['content']  # concatenate each chunk to the existing text
-                    response_text.markdown(f"<p style='word-wrap: break-word;'>{full_response}</p>", unsafe_allow_html=True)
+                if full_response is None:
+                    count = 0
+                else:
+                    count = 1
+                if count =1:
+                    st.loader("generating)
+                else:
+                    for chunk in stream:
+                        full_response += chunk['message']['content']  # concatenate each chunk to the existing text
+                        response_text.markdown(f"<p style='word-wrap: break-word;'>{full_response}</p>", unsafe_allow_html=True)
 
         elif(model_name == "test"):
             stream = ollama.chat(
