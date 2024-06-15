@@ -81,7 +81,7 @@ if model_name:
                 image_bytes = f.read()
 
     if prompt := st.chat_input("What is up?"):
-        global count = 0
+        count = 0
         # Display user message in chat message container
         with st.chat_message("user"):
             st.markdown(' '.join(prompt.split('\n')), unsafe_allow_html=True)
