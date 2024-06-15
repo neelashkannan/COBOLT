@@ -110,7 +110,7 @@ if model_name:
                     count = 0
                 else:
                     count = 1
-                if count =1:
+                if count == 1:
                     st.loader("generating")
                 else:
                     for chunk in stream:
