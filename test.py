@@ -105,8 +105,8 @@ if model_name:
             )
             with st.chat_message("assistant"):
                 response_text = st.empty()  # placeholder for the text
-                full_response = None
-                if full_response is None and count == 0:
+                full_response = ""
+                if full_response =="" and count == 0:
                     st.warning("generating")
                     count = count +1
                    
