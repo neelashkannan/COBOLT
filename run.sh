@@ -9,7 +9,7 @@ ollama create demo2 -f Modelfile2 &
 
 sleep 10
 
-ollama create demo2 -f Modelfile2 &
+ollama create demo3 -f Modelfile3 &
 
 sleep 5
 streamlit run test.py 
