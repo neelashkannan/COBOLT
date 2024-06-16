@@ -82,19 +82,25 @@ if model_name:
         if model_name == "demo3":
             if uploaded_file:
                 stream = ollama.chat(
-                    model='llava',  # replace 'llava' with your model name
+                    model='demo3',  # replace 'llava' with your model name
                     messages=[{'role': 'user', 'content': prompt, 'images': [image_bytes]}],
                     stream=True
                 )
             else:
                 stream = ollama.chat(
-                    model='tinyllama',  # replace 'llava' with your model name
+                    model='demo2',  # replace 'llava' with your model name
                     messages=[{'role': 'user', 'content': prompt}],
                     stream=True
                 )
+        elif model_name == "demo2" :
+            stream = ollama.chat(
+                model='demo2',
+                messages=[{'role': 'user', 'content': prompt}],
+                stream=True
+            )
         else:
             stream = ollama.chat(
-                model='tinyllama',
+                model='demo1',
                 messages=[{'role': 'user', 'content': prompt}],
                 stream=True
             )
