@@ -12,4 +12,8 @@ sleep 10
 ollama create demo3 -f Modelfile3 &
 
 sleep 15
-streamlit run test.py 
+pip3 install open-webui
+
+sleep 10
+
+open-webui serve
