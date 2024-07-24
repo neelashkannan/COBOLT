@@ -11,5 +11,5 @@ sleep 10
 
 ollama create demo3 -f Modelfile3 &
 
-sleep 5
+sleep 15
 streamlit run test.py 
