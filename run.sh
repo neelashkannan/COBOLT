@@ -12,7 +12,7 @@ sleep 10
 ollama create demo3 -f Modelfile3 &
 
 sleep 15
-pip3 install open-webui
+pip3 install open-webui &
 
 sleep 10
 
